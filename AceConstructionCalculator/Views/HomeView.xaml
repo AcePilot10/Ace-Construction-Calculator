@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:list="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    x:Class="AceConstructionCalculator.Views.HomeView"
+    xmlns:viewmodels="clr-namespace:AceConstructionCalculator.ViewModels"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:styles="clr-namespace:AceConstructionCalculator.Styles" xmlns:converters="clr-namespace:AceConstructionCalculator.Converters">
+
+     <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:ReverseBoolConverter x:Key="ReverseBoolConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <styles:EntryStyles/>
+                <styles:BorderStyles/>
+                <styles:LabelStyles/>
+                <styles:ButtonStyles/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.BindingContext>
+        <viewmodels:HomeViewModel/>
+    </ContentView.BindingContext>
+
+    <ContentView.Content>
+
+        <StackLayout Margin="30">
+
+            <StackLayout
+                Margin="0,100,0,0">
+                <Label Text="Construction Calculator"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                       FontSize="25"
+                        Style="{StaticResource TitleLabelStyle}"/>
+
+                <buttons:SfButton
+                    Text="New Project"
+                    HorizontalOptions="Center"
+                    CornerRadius="10"
+                    Padding="20,0,20,0"
+                    Clicked="SfButton_Clicked"
+                    Style="{StaticResource SimpleButtonStyle}"/>
+            </StackLayout>
+
+            <border:SfBorder 
+                   BorderColor="Purple"
+                   HorizontalOptions="Center" 
+                   BorderWidth="2"
+                   CornerRadius="15"
+                Margin="0,0,0,100"
+                VerticalOptions="EndAndExpand"
+                HasShadow="True">
+
+                <StackLayout>
+                    <StackLayout IsVisible="{Binding IsLoading, Converter={StaticResource ReverseBoolConverter}}">
+
+                        <StackLayout Background="Purple"
+                                     IsVisible="{Binding HasSavedProjects}">
+
+                            <list:SfListView ItemsSource="{Binding RecentProjects}"
+                                             Margin="20"
+                                             ItemSpacing="5"
+                                             Padding="20"
+                                             HeightRequest="150"
+                                             x:Name="listRecentProjects"
+                                             ItemTapped="listRecentProjects_ItemTapped"> 
+                                <list:SfListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <border:SfBorder BorderWidth="3"
+                                                         BorderColor="White"
+                                                         CornerRadius="10">
+                                            <StackLayout Orientation="Horizontal"
+                                                         Margin="10,0,10,0">
+
+                                                <Label Text="{Binding Config.Name}"
+                                                       VerticalOptions="Center"
+                                                       HorizontalOptions="Start"
+                                                       Style="{StaticResource DescriptionLabelStyle}"/>
+
+                                                <Label Text="{Binding Path=GrandTotal,
+                                                                StringFormat='{0:C}'}"
+                                                       VerticalOptions="Center"
+                                                       HorizontalOptions="EndAndExpand"
+                                                       Style="{StaticResource DescriptionLabelStyle}"/>
+                                            </StackLayout>
+                                        </border:SfBorder>
+                                    </DataTemplate>
+                                </list:SfListView.ItemTemplate>
+                            </list:SfListView>
+
+                            <buttons:SfButton Text="View All Projects"
+                                              Style="{StaticResource SimpleButtonStyle}"
+                                              Margin="30"
+                                              CornerRadius="15"
+                                              Command="{Binding ViewAllProjectsCommand}"/>
+
+                        </StackLayout>
+
+                            <Label Text="You havn't created any projects yet!"
+                                   IsVisible="{Binding HasSavedProjects, Converter={StaticResource ReverseBoolConverter}}"
+                                   Style="{StaticResource SimpleLabelStyle}"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+
+                    <Label Text="Loading..."
+                           IsVisible="{Binding IsLoading}"
+                           BackgroundColor="Purple"
+                           Margin="5"/>
+
+                </StackLayout>
+            </border:SfBorder>
+        </StackLayout>
+
+    </ContentView.Content>
+</ContentView>

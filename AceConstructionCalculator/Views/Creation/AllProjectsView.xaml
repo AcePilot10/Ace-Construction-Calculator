@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:styles="clr-namespace:AceConstructionCalculator.Styles" xmlns:list="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" xmlns:viewmodels="clr-namespace:AceConstructionCalculator.ViewModels" xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    x:Class="AceConstructionCalculator.Views.AllProjectsView"
+    x:Name="content"
+    xmlns:sfpopup="clr-namespace:Syncfusion.XForms;assembly=Syncfusion.SfPopupLayout.XForms" xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <styles:LabelStyles/>
+                <styles:ListViewStyles/>
+                <styles:EntryStyles/>
+                <styles:ButtonStyles/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.BindingContext>
+        <viewmodels:AllProjectsViewModel/>
+    </ContentView.BindingContext>
+
+    <ContentView.Content>
+        <StackLayout>
+
+            <Entry Style="{StaticResource BorderlessEntryStyle}"
+                   VerticalOptions="Start"
+                   HorizontalOptions="FillAndExpand"
+                   Placeholder="Search For Projects"
+                   Text="{Binding SearchQuery}"
+                   TextChanged="Entry_TextChanged"
+                   BackgroundColor="White"
+                    Margin="5"/>
+
+            <list:SfListView ItemsSource="{Binding Projects}"
+                             VerticalOptions="FillAndExpand"
+                             HorizontalOptions="FillAndExpand"
+                             Margin="30"
+                             AllowSwiping="False"
+                             ItemSize="100"
+                             ItemTapped="SfListView_ItemTapped"
+                             x:Name="listProjects"
+                             SwipeStarted="listProjects_SwipeStarted">
+                <list:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <border:SfBorder BorderColor="Black"
+                                         BorderThickness="2,1,2,1"
+                                         BorderWidth="1">
+                            <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="FillAndExpand"
+                                     Background="Purple"
+                                         Padding="20">
+
+                                <Label Text="{Binding Config.Name}"
+                                       Style="{StaticResource SimpleLabelStyle}"
+                                       FontSize="Medium"/>
+
+                                <Label Text="{Binding GrandTotal, StringFormat='{0:C}'}"
+                                       Style="{StaticResource SimpleLabelStyle}"
+                                       HorizontalOptions="EndAndExpand"
+                                       FontSize="Medium"/>
+                        
+                            </StackLayout>
+                        </border:SfBorder>
+                    </DataTemplate>
+                </list:SfListView.ItemTemplate>
+
+                <list:SfListView.RightSwipeTemplate>
+                    <DataTemplate x:Name="LeftSwipeTemplate">
+                        <border:SfBorder BorderColor="Black"
+                                         BorderThickness="2,1,2,1"
+                                         BorderWidth="1">
+
+                            <Button ImageSource="trash.png"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Padding="15"
+                                    BackgroundColor="Red"
+                                    x:Name="btnDelete"
+                                    Clicked="btnDelete_Clicked"/>
+
+                        </border:SfBorder>
+                    </DataTemplate>
+                </list:SfListView.RightSwipeTemplate>
+                
+            </list:SfListView>
+
+            <buttons:SfButton Text="Home"
+                              Command="{Binding BackCommand}"
+                              VerticalOptions="EndAndExpand"
+                              HorizontalOptions="FillAndExpand"
+                              Padding="15"
+                              Margin="10,0,10,5"
+                              Style="{StaticResource SimpleButtonStyle}"/>
+
+            <sfPopup:SfPopupLayout x:Name="popupLayout">
+                <sfPopup:SfPopupLayout.PopupView>
+                    <sfPopup:PopupView AppearanceMode="TwoButton"
+                                       HeaderTitle="Delete Project">
+                        <sfPopup:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <Label Text="Are you sure you'd like to permanently delete this project?"
+                                       HorizontalOptions="Center"
+                                       Margin="5"/>
+                            </DataTemplate>
+                        </sfPopup:PopupView.ContentTemplate>
+                        <sfPopup:PopupView.FooterTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Horizontal">
+                                    <buttons:SfButton Text="Cancel"
+                                                      VerticalOptions="FillAndExpand"
+                                                      HorizontalOptions="FillAndExpand"
+                                                      x:Name="cancelDelete"
+                                                      Clicked="cancelDelete_Clicked"/>
+                                     <buttons:SfButton Text="Delete"
+                                                      VerticalOptions="FillAndExpand"
+                                                      HorizontalOptions="FillAndExpand"
+                                                       BackgroundColor="Red"
+                                                       x:Name="ConfirmDelete"
+                                                       Clicked="ConfirmDelete_Clicked"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </sfPopup:PopupView.FooterTemplate>
+                    </sfPopup:PopupView>
+                </sfPopup:SfPopupLayout.PopupView>
+            </sfPopup:SfPopupLayout>
+
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

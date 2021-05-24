@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="AceConstructionCalculator.Styles.FrameStyles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+      <!--Common style for custom shadow frames-->  
+    <Style x:Key="CustomShadowFrameStyle" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{DynamicResource GrayShadowColor}" />
+        <Setter Property="BorderColor" Value="{DynamicResource GrayShadowColor}" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="HasShadow" Value="True" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+    </Style>
+
+</ResourceDictionary>

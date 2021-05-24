@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:viewmodels="clr-namespace:AceConstructionCalculator.ViewModels"
+	xmlns:views="clr-namespace:AceConstructionCalculator.Views"
+	xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+    x:Class="AceConstructionCalculator.MainPage"
+	xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:df="clr-namespace:Syncfusion.XForms.DataForm;assembly=Syncfusion.SfDataForm.XForms" xmlns:list="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:style="clr-namespace:AceConstructionCalculator.Styles"
+	Title="Ace Construction Calculator"
+	ios:Page.UseSafeArea="True"
+	>
+
+    <ContentPage.BindingContext>
+		<viewmodels:MainPageViewModel/>
+	</ContentPage.BindingContext>
+
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<style:LabelStyles/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+
+	<ContentPage.Content>
+
+		<sfPopup:SfPopupLayout x:Name="popupLayout">
+		   <sfPopup:SfPopupLayout.Content> 
+				<AbsoluteLayout>
+					<Image AbsoluteLayout.LayoutFlags="All"
+							AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+							Source="background.png" Aspect="AspectFill"/>
+					<StackLayout
+						VerticalOptions="FillAndExpand"
+						   HorizontalOptions="FillAndExpand"
+						   AbsoluteLayout.LayoutBounds="0,0,1,1"
+						   AbsoluteLayout.LayoutFlags="All"
+						x:Name="ContentContainer">
+
+						<views:ContentScreen
+							VerticalOptions="FillAndExpand"
+							HorizontalOptions="FillAndExpand"/>
+
+					</StackLayout>
+					<ImageButton
+							x:Name="btnHelp"
+							Source="head.png"
+							WidthRequest="85"
+							HeightRequest="85"
+							BackgroundColor="Aqua"
+							AbsoluteLayout.LayoutBounds="0.95,0.95"
+							AbsoluteLayout.LayoutFlags="PositionProportional"
+							CornerRadius="43"
+							Clicked="btnHelp_Clicked"
+						/>
+				</AbsoluteLayout>
+
+			</sfPopup:SfPopupLayout.Content>
+
+			<sfPopup:SfPopupLayout.PopupView>
+			<sfPopup:PopupView HeaderTitle="How Can I Help?"
+							   IsFullScreen="True">
+				<sfPopup:PopupView.ContentTemplate>
+					<DataTemplate>
+						<StackLayout>
+							<Image Source="full.png"
+								HorizontalOptions="Center"
+								 WidthRequest="250"
+								 HeightRequest="250"/>
+
+							<Label Text="Let's see what I can help you with!"
+								   BackgroundColor="SkyBlue"
+								   HorizontalTextAlignment="Center"/>
+
+							<list:SfListView ItemsSource="{Binding HelpDeskContent}"
+														x:Name="listQuestions"
+						BackgroundColor="Gray"
+						VerticalOptions="FillAndExpand"
+						HorizontalOptions="FillAndExpand"
+						ItemTapped="listQuestions_ItemTapped"
+						ItemSize="100">
+
+								<list:SfListView.ItemTemplate>
+									<DataTemplate>
+										
+										<StackLayout HorizontalOptions="FillAndExpand"
+														Margin="15"
+														Padding="20"
+					   BackgroundColor="White">
+
+											<Label Text="{Binding Question}"
+													  HorizontalOptions="Center"
+													  Style="{StaticResource SimpleLabelStyle}"
+				  FontSize="Body"
+				  TextColor="Black"/>
+
+										</StackLayout>
+											
+									</DataTemplate>
+								</list:SfListView.ItemTemplate>
+
+							</list:SfListView>
+
+						</StackLayout>
+					</DataTemplate>
+				</sfPopup:PopupView.ContentTemplate>
+			</sfPopup:PopupView>
+		</sfPopup:SfPopupLayout.PopupView>
+
+		</sfPopup:SfPopupLayout>
+
+	</ContentPage.Content>
+</ContentPage>

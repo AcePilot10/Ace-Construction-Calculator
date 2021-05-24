@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:steps="clr-namespace:AceConstructionCalculator.Views.Creation.Steps"
+    x:Class="AceConstructionCalculator.Views.Creation.PricingConfigFrame"
+    xmlns:styles="clr-namespace:AceConstructionCalculator.Styles">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <styles:ButtonStyles x:Name="ButtonStyles"/>
+                <styles:LabelStyles x:Name="LabelStyles"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+
+        <StackLayout Margin="35">
+            <!--<border:SfBorder BackgroundColor="Gray"
+                             CornerRadius="25">
+                <progressBar:SfStepProgressBar
+                            HorizontalOptions="Center"
+                    x:Name="progress">
+                <progressBar:SfStepProgressBar.NotStartedStepStyle>
+                    <progressBar:StepStyle x:TypeArguments="progressBar:NotStartedStepState"
+                                           MarkerShapeType="Square"
+                                           MarkerStrokeColor="Red"
+                                           MarkerContentType="Cross"
+                                           MarkerContentFillColor="Red"/>
+                </progressBar:SfStepProgressBar.NotStartedStepStyle>
+
+                <progressBar:SfStepProgressBar.InProgressStepStyle>
+                    <progressBar:StepStyle x:TypeArguments="progressBar:InProgressStepState"
+                                           MarkerShapeType="Circle"
+                                           MarkerContentType="None"
+                                           MarkerFillColor="Black"/>
+                </progressBar:SfStepProgressBar.InProgressStepStyle>
+
+                <progressBar:SfStepProgressBar.CompletedStepStyle>
+                    <progressBar:StepStyle x:TypeArguments="progressBar:CompletedStepState"
+                                           MarkerShapeType="Circle"
+                                           MarkerContentType="Tick"
+                                           MarkerContentFillColor="White"
+                                           MarkerFillColor="Green"/>
+                </progressBar:SfStepProgressBar.CompletedStepStyle>
+
+                </progressBar:SfStepProgressBar>
+
+
+            </border:SfBorder>-->
+
+            <progressBar:SfLinearProgressBar x:Name="progressBar"/>
+
+            <Label Text="{Binding CurrentCategory}"
+                   HorizontalOptions="Center"
+                   Style="{StaticResource TitleLabelStyle}"/>
+
+            <border:SfBorder VerticalOptions="FillAndExpand"
+                             HorizontalOptions="FillAndExpand"
+                             Margin="15"
+                             BackgroundColor="LightPink"
+                             BorderColor="Purple"
+                             BorderWidth="2"
+                             HasShadow="True"
+                             CornerRadius="10"
+                             ShadowColor="Black">
+
+
+                <StackLayout VerticalOptions="FillAndExpand"
+                       HorizontalOptions="FillAndExpand"
+                            x:Name="content">
+                </StackLayout>
+
+            </border:SfBorder>
+
+
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="StartAndExpand">
+
+                <buttons:SfButton Text="Back"
+                                  HorizontalOptions="Start"
+                                  x:Name="btnBack"
+                                  Clicked="btnBack_Clicked"
+                                  Style="{StaticResource ProgressButton}"/>
+
+                <buttons:SfButton Text="Next"
+                                  HorizontalOptions="End"
+                                  x:Name="btnNext"
+                                  Clicked="btnNext_Clicked"
+                                  Style="{StaticResource ProgressButton}"/>
+
+            </StackLayout>
+        </StackLayout>
+
+
+    </ContentView.Content>
+</ContentView>

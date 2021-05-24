@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dataform="clr-namespace:Syncfusion.XForms.DataForm;assembly=Syncfusion.SfDataForm.XForms"
+    xmlns:viewmodels="clr-namespace:AceConstructionCalculator.ViewModels.Creation"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:styles="clr-namespace:AceConstructionCalculator.Styles"
+    x:Class="AceConstructionCalculator.Views.Creation.NewProjectConfiguration">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <styles:EntryStyles/>
+                <styles:BorderStyles/>
+                <styles:LabelStyles/>
+                <styles:ButtonStyles/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Margin="35">
+
+            <Label Text="New Project"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource TitleLabelStyle}"
+                   TextColor="Black"/>
+
+            <border:SfBorder CornerRadius="25"
+                                VerticalOptions="FillAndExpand"
+                                HorizontalOptions="FillAndExpand"
+                                BorderWidth="0"
+                                Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                <StackLayout>
+                    <ScrollView
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        Background="White">
+                        <StackLayout VerticalOptions="FillAndExpand"
+                                        HorizontalOptions="FillAndExpand"
+                                        Margin="15">
+
+                            <dataform:SfDataForm VerticalOptions="FillAndExpand"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    DataObject="{Binding Form}"
+                                                    ValidationMode="LostFocus"
+                                                    LabelPosition="Top"
+                                                    x:Name="newProjectConfig"/>
+
+                        </StackLayout>
+                    </ScrollView>
+
+                    <buttons:SfButton Text="Continue"
+                                                HorizontalOptions="Center"
+                                                Style="{StaticResource SimpleButtonStyle}"
+                                                Padding="15"
+                                                CornerRadius="15"
+                                                x:Name="btnContinue"
+                                                Clicked="btnContinue_Clicked"/>
+
+                    <buttons:SfButton Text="Cancel"
+                                                HorizontalOptions="Center"
+                                                Style="{StaticResource SimpleButtonStyle}"
+                                                Padding="15"
+                                      BackgroundColor="Red"
+                                                CornerRadius="15"
+                                                x:Name="btnCancel"
+                                                Clicked="btnCancel_Clicked"/>
+                </StackLayout>
+            </border:SfBorder>
+
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

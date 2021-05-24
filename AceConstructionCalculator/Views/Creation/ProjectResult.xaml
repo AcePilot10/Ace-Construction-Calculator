@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:styles="clr-namespace:AceConstructionCalculator.Styles" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    x:Class="AceConstructionCalculator.Views.Creation.ProjectResult">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <styles:LabelStyles/>
+                <styles:ButtonStyles/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ScrollView>
+        <StackLayout>
+
+            <border:SfBorder BackgroundColor="Purple"
+                             BorderWidth="0"
+                             Margin="15"
+                             Padding="10"
+                             CornerRadius="15">
+                <StackLayout x:Name="categoryBreakdownHolder"
+                             VerticalOptions="FillAndExpand"
+                             HorizontalOptions="FillAndExpand">
+
+                </StackLayout>
+            </border:SfBorder>
+
+            <border:SfBorder 
+                             Margin="5"
+                             CornerRadius="15"
+                             BackgroundColor="MediumPurple"
+                             BorderWidth="0">
+                <StackLayout Margin="15"
+                             Orientation="Horizontal"
+                             HorizontalOptions="FillAndExpand">
+                    <Label Text="Grand Total"
+                           Style="{StaticResource SimpleLabelStyle}"
+                           HorizontalOptions="Start"/>
+                    <Label Text="{Binding Result.GrandTotal, StringFormat='{0:C}'}"
+                           Style="{StaticResource SimpleLabelStyle}"
+                           HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+            </border:SfBorder>
+
+            <buttons:SfButton Style="{StaticResource SimpleButtonStyle}"
+                              Text="Complete"
+                              HorizontalOptions="Center"
+                              CornerRadius="20"
+                              Padding="20"
+                              x:Name="btnComplete"
+                              Command="{Binding CompleteCommand}"/>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentView>
